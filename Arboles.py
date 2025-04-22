@@ -1,3 +1,4 @@
+# 2241917 - Vanessa Martinez Angarita
 class Nodo:
     def __init__(self, dato):
         self.dato = dato

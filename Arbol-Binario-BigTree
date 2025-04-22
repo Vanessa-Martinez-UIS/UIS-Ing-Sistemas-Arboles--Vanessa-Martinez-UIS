@@ -1,0 +1,58 @@
+from bigtree import Node, print_tree, find_path
+
+# Árbol base
+def CrearArbol():
+    raiz = Node("A")
+    
+    b = Node("B", parent=raiz)
+    c = Node("C", parent=raiz)
+    d = Node("D", parent=raiz)
+    
+    Node("E", parent=b)
+    Node("F", parent=b)
+    Node("G", parent=b)
+
+    Node("H", parent=c)
+    Node("I", parent=c)
+
+    Node("J", parent=d)
+    Node("K", parent=d)
+
+    return raiz
+
+# Obtener la raíz
+def ObtenerRaiz(nodo):
+    return nodo.root.name
+
+# Obtener el padre de un nodo
+def ObtenerPadre(nodo):
+    return nodo.parent.name if nodo.parent else None
+
+# Agregar hijo a un nodo específico
+def AgregarHijo(raiz, nombrepadre, nombrehijo):
+    nodopadre = raiz.get_node_by_name(nombrepadre)
+    if nodopadre:
+        nuevohijo = Node(nombrehijo, parent=nodopadre)
+        return nuevohijo
+    else:
+        raise ValueError(f"No se encontró el nodo con nombre '{nombrepadre}'")
+
+# Verificar si un nodo es hoja
+def VerificarSiEsHoja(nodo):
+    return nodo.is_leaf
+
+# DEMO
+if __name__ == "__main__":
+    arbol = CrearArbol()
+    
+    print("Árbol:")
+    print_tree(arbol)
+
+    print("\nRaíz de 'H':", ObtenerRaiz(arbol.get_node_by_name("H")))
+    print("Padre de 'F':", ObtenerPadre(arbol.get_node_by_name("F")))
+    print("'C' es hoja?", VerificarSiEsHoja(arbol.get_node_by_name("C")))
+
+    print("\nAgregando hijo 'L' a 'B'...")
+    AgregarHijo(arbol, "B", "L")
+    
+    print_tree(arbol)
